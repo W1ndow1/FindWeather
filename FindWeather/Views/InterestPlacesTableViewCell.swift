@@ -38,5 +38,15 @@ class InterestPlacesTableViewCell: UITableViewCell {
         currentTemperature.text = "\(cityData.main.temp)℃"
         currentHumidity.text = "\(cityData.main.humidity)%"
     }
+    public func configure(with model: WeatherResponseName) {
+        guard let url = URL(string: "https://openweathermap.org/img/wn/\(String(describing: model.weather[0].icon))@2x.png") else { return }
+        URLSession.shared.dataTask(with: url, completionHandler: { [weak self] data, response, error in
+            guard let imageData = data else { return }
+            DispatchQueue.main.async {
+                self?.weatherIcon.image = UIImage(data: imageData)
+            }
+        })
+        .resume()
+    }
 
 }

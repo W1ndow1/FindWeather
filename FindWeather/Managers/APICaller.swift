@@ -38,8 +38,8 @@ class APICaller {
             guard let data = data, error == nil else { return }
             do {
                 let results = try JSONDecoder().decode(WeatherResponseName.self, from: data)
-                completion(.success(results))
                 print(results)
+                completion(.success(results))
             } catch {
                 completion(.failure(NetworkError.decodingError))
                 print(error.localizedDescription)

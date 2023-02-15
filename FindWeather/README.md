@@ -1,5 +1,9 @@
-#  API 참고 사항
-## openweathermap.org에서 사용하는 API 예시
+# FindWeather
+
+##(1)설명 : 날씨 조회 어플리케이션 
+
+
+##(2)API참고사항 : openweathermap.org에서 사용하는 API 예시
 
 - 위도 경도 정보로 조회
 https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}

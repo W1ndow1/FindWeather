@@ -34,3 +34,24 @@ extension String {
         return data[id] ?? ""
     }
 }
+
+extension Date {
+    func toString( dataFormat format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale.current
+        return dateFormatter.string(from: self)
+    }
+    
+    func toStringKST( dataFormat format: String) -> String {
+        return self.toString(dataFormat: format)
+    }
+    
+    func toStringUTC( _ timezone: Int) -> String {
+        let dateFomatter = DateFormatter()
+        dateFomatter.dateFormat = "a h:m"
+        dateFomatter.timeZone = TimeZone(secondsFromGMT: timezone)
+        return dateFomatter.string(from: self)
+    }
+}
