@@ -48,5 +48,12 @@ class InterestPlacesTableViewCell: UITableViewCell {
         })
         .resume()
     }
+    public func configureAsync(with model: WeatherResponseName) async throws -> Void {
+        guard let url = URL(string: "https://openweathermap.org/img/wn/\(String(describing: model.weather[0].icon))@2x.png") else { return }
+        let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { return }
+        guard let imageData = UIImage(data: data) else { return }
+        weatherIcon.image = imageData
+    }
 
 }

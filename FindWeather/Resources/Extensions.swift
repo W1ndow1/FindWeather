@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
    static func codeToCityName(id: Int) -> String{

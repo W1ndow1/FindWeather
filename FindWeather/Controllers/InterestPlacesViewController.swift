@@ -7,17 +7,9 @@
 
 import UIKit
 
-protocol hiddenViewDelegate: AnyObject {
-    func hiddenView(isHidden: Bool)
-}
-
-
 class InterestPlacesViewController: UIViewController {
     
-    
     @IBOutlet weak var weatherTableView: UITableView!
-    
-    weak var hideDelegate: hiddenViewDelegate?
     
     private var cityList: [List] = []
     private var filtterdList: [List] = []
@@ -30,19 +22,18 @@ class InterestPlacesViewController: UIViewController {
         let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
         return isActive && isSearchBarHasText
     }
-    
 
-override func viewDidLoad() {
-    super.viewDidLoad()
-
-    //setupNavigationControllerUI()
-    
-    setupSearchControllerUI()
-    setupTableView()
-    
-    registerXib(tableView: weatherTableView)
-    loadWeatherData()
-}
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        registerXib(tableView: weatherTableView)
+        setupSearchControllerUI()
+        setupTableView()
+        
+        Task{
+            await loadWeatherDataAsync()
+        }
+    }
     
     private func setupTableView() {
         self.weatherTableView.delegate = self
@@ -56,31 +47,14 @@ override func viewDidLoad() {
         searchController.searchBar.placeholder = "도시명칭(영어)"
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
         searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
-        self.navigationItem.searchController = searchController
-        self.navigationItem.title = "도시"
+        
+        navigationItem.searchController = searchController
+        navigationItem.title = "도시"
         
         navigationController?.navigationBar.tintColor = .gray
         navigationController?.navigationBar.barTintColor = .systemPink
-        
     }
-    
-    
-    private func setupNavigationControllerUI() {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "검색"
-        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchResultsUpdater = self
-        definesPresentationContext = true
-        
-        self.navigationItem.searchController = searchController
-        self.navigationItem.title = "도시"
 
-        navigationController?.navigationBar.tintColor = .gray
-        navigationController?.navigationBar.barTintColor = .systemPink
-    }
-    
     private func loadWeatherData() {
         APICaller().weatherByCityCode(completion: { [weak self] result in
             switch result {
@@ -95,6 +69,17 @@ override func viewDidLoad() {
         })
     }
     
+    private func loadWeatherDataAsync() async {
+        do{
+            let cityList = try await APICaller().weatherByCityCodeAsync()
+            self.cityList = cityList.list
+            weatherTableView.reloadData()
+        }
+        catch{
+            print(error.localizedDescription)
+        }
+    }
+
     public func registerXib(tableView: UITableView) {
         let nibName = UINib(nibName: "InterestPlacesTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "InterestPlaceCell")
@@ -103,7 +88,7 @@ override func viewDidLoad() {
 
 extension InterestPlacesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.isFiltering ? self.filtterdList.count : self.cityList.count
+        return cityList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,9 +111,8 @@ extension InterestPlacesViewController: UITableViewDelegate, UITableViewDataSour
                 self.cityDataByName = cityDataByName
                 DispatchQueue.main.async { [weak self] in
                     let vcPass = self?.storyboard?.instantiateViewController(withIdentifier: "CityDetailViewController") as! CityDetailViewController
-                    vcPass.configure(WeatherResponseName(main: cityDataByName.main, wind: cityDataByName.wind, name: cityDataByName.name, weather: cityDataByName.weather, dt: cityDataByName.dt, id: cityDataByName.id, sys: cityDataByName.sys))
+                    vcPass.configure(with: cityDataByName)
                     self?.navigationController?.pushViewController(vcPass, animated: true)
-
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -138,7 +122,7 @@ extension InterestPlacesViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 //MARK: UISearchController
-extension InterestPlacesViewController: UISearchResultsUpdating, SearchResultsViewControllerDelegate, UISearchBarDelegate{
+extension InterestPlacesViewController: UISearchResultsUpdating, SearchResultsViewControllerDelegate{
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let inputText = searchController.searchBar.text,
@@ -164,16 +148,11 @@ extension InterestPlacesViewController: UISearchResultsUpdating, SearchResultsVi
         }
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
-    func searchResultsViewControllerDidTapItem(viewModel: WeatherResponseName) {
+    func searchResultsViewControllerDidTapItem(with viewModel: WeatherResponseName) {
         DispatchQueue.main.async { [weak self] in
-            let vcPass = self?.storyboard?.instantiateViewController(withIdentifier: "CityDetailViewController") as! CityDetailViewController
-            vcPass.configure(WeatherResponseName(main: viewModel.main, wind: viewModel.wind, name: viewModel.name, weather: viewModel.weather, dt: viewModel.dt, id: viewModel.id, sys: viewModel.sys))
-            self?.hideDelegate?.hiddenView(isHidden: true)
-            self?.navigationController?.pushViewController(vcPass, animated: true)
+            let viewController = self?.storyboard?.instantiateViewController(withIdentifier: "CityDetailViewController") as! CityDetailViewController
+            viewController.configure(with: viewModel)
+            self?.navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }

@@ -19,6 +19,7 @@ struct WeatherResponseName: Codable{
     let dt: Int
     let id: Int
     let sys: SysByName
+    let coord: Coord
 }
 
 struct Clouds: Codable {
