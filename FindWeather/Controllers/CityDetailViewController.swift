@@ -39,12 +39,6 @@ class CityDetailViewController: UIViewController {
         windClockView.layer.cornerRadius = 10
         mapView.layer.cornerRadius = 10
         windClock.image = UIImage(named: "upArrow")?.withTintColor(.white)
-
-        let cityLocation = MKPointAnnotation()
-        cityLocation.coordinate = CLLocationCoordinate2D(latitude: 33.95, longitude: -117.34)
-        cityLocation.title = "sample"
-        cityLocation.subtitle = "subtitle"
-        self.mapView.addAnnotation(cityLocation)
         
     }
     
