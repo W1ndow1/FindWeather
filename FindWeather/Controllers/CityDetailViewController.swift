@@ -39,6 +39,13 @@ class CityDetailViewController: UIViewController {
         windClockView.layer.cornerRadius = 10
         mapView.layer.cornerRadius = 10
         windClock.image = UIImage(named: "upArrow")?.withTintColor(.white)
+
+        let cityLocation = MKPointAnnotation()
+        cityLocation.coordinate = CLLocationCoordinate2D(latitude: 33.95, longitude: -117.34)
+        cityLocation.title = "sample"
+        cityLocation.subtitle = "subtitle"
+        self.mapView.addAnnotation(cityLocation)
+        
     }
     
     //TODO: - 넘어오는 방향에 맞춰 도형 회전시키기
@@ -87,6 +94,21 @@ class CityDetailViewController: UIViewController {
         .resume()
         pointWindClock(with: cityData.wind.deg)
         mapToPosition(lat: cityData.coord.lat, lon: cityData.coord.lon, name: cityData.name ?? "")
+    }
+    
+}
+
+extension CityDetailViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation { return nil }
+        let id  = MKMapViewDefaultAnnotationViewReuseIdentifier
+        if let view = mapView.dequeueReusableAnnotationView(withIdentifier: id) as? MKMarkerAnnotationView{
+            if annotation.title == "sample" {
+                return view
+            }
+        }
+        return nil
     }
     
 }
