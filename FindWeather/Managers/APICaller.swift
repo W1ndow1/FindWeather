@@ -23,6 +23,7 @@ enum NetworkError: Error {
     case noData
     case decodingError
     case failedToGetData
+    case badQuary
 }
 
 class APICaller {
@@ -64,6 +65,27 @@ class APICaller {
             }
         }
         task.resume()
+    }
+    
+    func weatherByCityNameAsync(cityName query: String) async throws -> WeatherResponseName {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            throw NetworkError.badQuary }
+        guard let url = URL(string: "\(Constants.baseURL)weather?q=\(query)&appid=\(Bundle.main.APIKey)&\(Constants.language)&units=metric") else {
+            throw NetworkError.badURL }
+        let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw NetworkError.noData }
+        guard let result = try JSONDecoder().decode(WeatherResponseName?.self, from: data) else { throw NetworkError.decodingError }
+        return result
+    }
+    
+    
+    func weatherByCityCodeAsync() async throws -> WeatherResponseCode {
+        guard let url = URL(string: "\(Constants.baseURL)group?id=\(Constants.cityCode)&appid=\(Bundle.main.APIKey)&\(Constants.language)&units=metric") else {
+            throw NetworkError.badURL }
+        let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw NetworkError.noData }
+        guard let result = try JSONDecoder().decode(WeatherResponseCode?.self, from: data) else { throw NetworkError.decodingError }
+        return result
     }
 }
 

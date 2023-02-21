@@ -8,19 +8,17 @@
 import UIKit
 
 protocol SearchResultsViewControllerDelegate: AnyObject {
-    func searchResultsViewControllerDidTapItem(viewModel: WeatherResponseName)
+    func searchResultsViewControllerDidTapItem(with viewModel: WeatherResponseName)
 }
 
 
 class SearchResultsViewController: UIViewController {
     
-    @IBOutlet weak var uiview: UIView!
     @IBOutlet weak var searchResultTableView: UITableView!
     
     public weak var searchDelegate: SearchResultsViewControllerDelegate?
     
     public var cityData: WeatherResponseName?
-    public var cityList: [List] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,17 +41,32 @@ extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSourc
         return 1
     }
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         guard let cell = tableView.dequeueReusableCell(withIdentifier: "InterestPlaceCell", for: indexPath) as? InterestPlacesTableViewCell else {
-             return UITableViewCell()
-         }
-         let cityData = cityData
-         cell.cityName.text = cityData?.name
-         cell.currentHumidity.text = "\(cityData?.main.humidity ?? 0)%"
-         cell.currentTemperature.text = "\(cityData?.main.temp ?? 0)℃"
-         cell.weatherDescription.text = "\(cityData?.weather[0].description ?? "")"
-         if cityData != nil { cell.configure(with: cityData!) }
-         return cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "InterestPlaceCell", for: indexPath) as? InterestPlacesTableViewCell else {
+            return UITableViewCell()
+        }
+        let cityData = cityData
+        cell.cityName.text = cityData?.name
+        cell.currentHumidity.text = "\(cityData?.main.humidity ?? 0)%"
+        cell.currentTemperature.text = "\(cityData?.main.temp ?? 0)℃"
+        cell.weatherDescription.text = "\(cityData?.weather[0].description ?? "")"
+        if cityData != nil { cell.configure(with: cityData!) }
+        return cell
     }
-     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let selectedCityData = cityData
+        APICaller().weatherByCityName(with: selectedCityData?.name ?? "", completion: { [weak self] result in
+            switch result {
+            case .success(let result):
+                self?.cityData = result
+                DispatchQueue.main.async {
+                    self?.searchDelegate?.searchResultsViewControllerDidTapItem(with: result)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        })
+    }
 }
