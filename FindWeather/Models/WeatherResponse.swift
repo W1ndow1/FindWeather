@@ -37,11 +37,12 @@ struct Sys: Codable {
 
 struct SysByName: Codable {
     let sunrise, sunset, id, type: Int
-    let country: String
+    let country, pod: String
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.country = (try? container.decode(String.self, forKey: .country)) ?? ""
+        self.pod = (try? container.decode(String.self, forKey: .pod)) ?? ""
         self.sunrise = (try? container.decode(Int.self, forKey: .sunrise)) ?? 0
         self.sunset = (try? container.decode(Int.self, forKey: .sunset)) ?? 0
         self.id = (try? container.decode(Int.self, forKey: .id)) ?? 0

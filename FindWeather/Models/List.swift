@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct List: Codable{
+struct List: Codable {
     let coord: Coord
     let sys: Sys
     let weather: [Weather]
@@ -31,7 +31,9 @@ struct List: Codable{
         self.id = try container.decodeIfPresent(Int.self, forKey: .id)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
     }
+    
 }
+
 
 
 

@@ -84,7 +84,25 @@ class APICaller {
             throw NetworkError.badURL }
         let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw NetworkError.noData }
-        guard let result = try JSONDecoder().decode(WeatherResponseCode?.self, from: data) else { throw NetworkError.decodingError }
+        guard let result = try JSONDecoder().decode(WeatherResponseCode?.self, from: data) else { throw NetworkError.decodingError
+            
+        }
+        return result
+    }
+    
+    func fiveDayWeatherforecastAsync(lat latitude: Double, lon longtitude: Double) async throws -> WeatherForecast {
+        guard let url = URL(string: "\(Constants.baseURL)forecast?lat=\(latitude)&lon=\(longtitude)&appid=\(Bundle.main.APIKey)&\(Constants.language)&units=metric") else {
+            print("badURL")
+            throw NetworkError.badURL
+        }
+        let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            print("noData")
+            throw NetworkError.noData}
+        guard let result = try JSONDecoder().decode(WeatherForecast?.self, from: data) else {
+            print("decodingError")
+            throw NetworkError.decodingError
+        }
         return result
     }
 }

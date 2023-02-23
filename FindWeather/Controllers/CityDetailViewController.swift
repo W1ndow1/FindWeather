@@ -29,23 +29,48 @@ class CityDetailViewController: UIViewController {
     @IBOutlet weak var windClock: UIImageView!
     @IBOutlet weak var windClockView: UIStackView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var forecastWeatherTableView: UITableView!
+    
+    private var forecastList: [ForecastList] = []
+    private var cityData: WeatherResponseName?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        registerXib(tableView: forecastWeatherTableView)
         blueView.layer.cornerRadius = 10
         redView.layer.cornerRadius = 10
         windClockView.layer.cornerRadius = 10
         mapView.layer.cornerRadius = 10
         windClock.image = UIImage(named: "upArrow")?.withTintColor(.white)
         
+        forwardWeatherTableViewUISet()
+        
+        
+        
+        Task {
+            let forecastList = try await APICaller().fiveDayWeatherforecastAsync(lat: cityData?.coord.lat ?? 0.0, lon: cityData?.coord.lon ?? 0.0)
+            self.forecastList = forecastList.list
+            forecastWeatherTableView.reloadData()
+        }
     }
     
-    //TODO: - 넘어오는 방향에 맞춰 도형 회전시키기
+    //TODO: - 
+    public func registerXib(tableView: UITableView) {
+        let nibName = UINib(nibName: "CityDetailTableViewCell", bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: "CityDetailCell")
+    }
+    
+    
+    private func forwardWeatherTableViewUISet() {
+        forecastWeatherTableView.delegate = self
+        forecastWeatherTableView.dataSource = self
+    }
+    
     private func pointWindClock(with degree: Int) {
         DispatchQueue.main.async {
-            self.windClock.transform = CGAffineTransform(scaleX: 2, y: 2)
             self.windClock.transform = CGAffineTransform(rotationAngle: CGFloat(degree))
         }
     }
@@ -70,6 +95,7 @@ class CityDetailViewController: UIViewController {
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let imageData = data else { return }
             DispatchQueue.main.async {
+                self?.cityData = cityData
                 let cityNameToKo = String.codeToCityName(id: cityData.id)
                 self?.cityName.text = cityNameToKo.count == 0 ? cityData.name : cityNameToKo
                 self?.weatherIcon.image = UIImage(data: imageData)
@@ -88,21 +114,43 @@ class CityDetailViewController: UIViewController {
         .resume()
         pointWindClock(with: cityData.wind.deg)
         mapToPosition(lat: cityData.coord.lat, lon: cityData.coord.lon, name: cityData.name ?? "")
+
+       
     }
     
 }
-
-extension CityDetailViewController: MKMapViewDelegate {
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKUserLocation { return nil }
-        let id  = MKMapViewDefaultAnnotationViewReuseIdentifier
-        if let view = mapView.dequeueReusableAnnotationView(withIdentifier: id) as? MKMarkerAnnotationView{
-            if annotation.title == "sample" {
-                return view
-            }
-        }
-        return nil
+//MARK: UITableView
+extension CityDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return forecastList.count
+        
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = forecastWeatherTableView.dequeueReusableCell(withIdentifier: "CityDetailCell", for: indexPath) as? CityDetailTableViewCell else {
+            return UITableViewCell()
+        }
+        let forecastData = forecastList[indexPath.row]
+        Task {
+            try await cell.configureAsync(with:forecastData)
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        60
+    }
+}
+
+final class ContentSizedTableView: UITableView {
+  override var contentSize:CGSize {
+    didSet {
+      invalidateIntrinsicContentSize()
+    }
+  }
+
+  override var intrinsicContentSize: CGSize {
+    layoutIfNeeded()
+    return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
+  }
 }

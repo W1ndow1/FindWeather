@@ -29,6 +29,11 @@
 		A854A4262992CAAF001AC9D8 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A854A4252992CAAF001AC9D8 /* Main.swift */; };
 		A8756F4A299501E600F9B7C5 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8756F49299501E600F9B7C5 /* Converter.swift */; };
 		A89B59D029A3899300805B9F /* Pollution.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89B59CF29A3899300805B9F /* Pollution.swift */; };
+		A89B59D229A5F14A00805B9F /* WeatherForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89B59D129A5F14A00805B9F /* WeatherForecast.swift */; };
+		A89B59D429A5F56300805B9F /* Rain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89B59D329A5F56300805B9F /* Rain.swift */; };
+		A89B59D629A62B5700805B9F /* ForecastList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89B59D529A62B5700805B9F /* ForecastList.swift */; };
+		A89B59D929A66EB200805B9F /* CityDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89B59D729A66EB200805B9F /* CityDetailTableViewCell.swift */; };
+		A89B59DA29A66EB200805B9F /* CityDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A89B59D829A66EB200805B9F /* CityDetailTableViewCell.xib */; };
 		A8C7BD3C298CFB8E00E46D44 /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C7BD3B298CFB8E00E46D44 /* CityDetailViewController.swift */; };
 		A8C7BD3E298D010A00E46D44 /* SearchResultsViewContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C7BD3D298D010A00E46D44 /* SearchResultsViewContorller.swift */; };
 		A8E96706298ED46D00EE8ACC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E96705298ED46D00EE8ACC /* Extensions.swift */; };
@@ -78,6 +83,11 @@
 		A854A4252992CAAF001AC9D8 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		A8756F49299501E600F9B7C5 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		A89B59CF29A3899300805B9F /* Pollution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pollution.swift; sourceTree = "<group>"; };
+		A89B59D129A5F14A00805B9F /* WeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecast.swift; sourceTree = "<group>"; };
+		A89B59D329A5F56300805B9F /* Rain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rain.swift; sourceTree = "<group>"; };
+		A89B59D529A62B5700805B9F /* ForecastList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastList.swift; sourceTree = "<group>"; };
+		A89B59D729A66EB200805B9F /* CityDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailTableViewCell.swift; sourceTree = "<group>"; };
+		A89B59D829A66EB200805B9F /* CityDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityDetailTableViewCell.xib; sourceTree = "<group>"; };
 		A8B70CED298BE5AE0097580F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A8C7BD3B298CFB8E00E46D44 /* CityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailViewController.swift; sourceTree = "<group>"; };
 		A8C7BD3D298D010A00E46D44 /* SearchResultsViewContorller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewContorller.swift; sourceTree = "<group>"; };
@@ -189,8 +199,11 @@
 			isa = PBXGroup;
 			children = (
 				A81548AE298A47C10075F256 /* WeatherResponse.swift */,
+				A89B59D129A5F14A00805B9F /* WeatherForecast.swift */,
 				A854A41F2991EA0B001AC9D8 /* Weather.swift */,
 				A854A4212991EA52001AC9D8 /* Wind.swift */,
+				A89B59D329A5F56300805B9F /* Rain.swift */,
+				A89B59D529A62B5700805B9F /* ForecastList.swift */,
 				A854A4232992C448001AC9D8 /* List.swift */,
 				A854A4252992CAAF001AC9D8 /* Main.swift */,
 				A89B59CF29A3899300805B9F /* Pollution.swift */,
@@ -203,6 +216,8 @@
 			children = (
 				A81548B3298AD8470075F256 /* InterestPlacesTableViewCell.swift */,
 				A81548B4298AD8470075F256 /* InterestPlacesTableViewCell.xib */,
+				A89B59D729A66EB200805B9F /* CityDetailTableViewCell.swift */,
+				A89B59D829A66EB200805B9F /* CityDetailTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -324,6 +339,7 @@
 				A81548832988290D0075F256 /* LaunchScreen.storyboard in Resources */,
 				A81548AC298A06910075F256 /* WeatherInfo.plist in Resources */,
 				A81548802988290D0075F256 /* Assets.xcassets in Resources */,
+				A89B59DA29A66EB200805B9F /* CityDetailTableViewCell.xib in Resources */,
 				A81548B6298AD8470075F256 /* InterestPlacesTableViewCell.xib in Resources */,
 				A815487B2988290B0075F256 /* Main.storyboard in Resources */,
 			);
@@ -350,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A89B59D429A5F56300805B9F /* Rain.swift in Sources */,
 				A8E96706298ED46D00EE8ACC /* Extensions.swift in Sources */,
 				A81548AA2989313D0075F256 /* APICaller.swift in Sources */,
 				A81548AF298A47C10075F256 /* WeatherResponse.swift in Sources */,
@@ -357,8 +374,11 @@
 				A8756F4A299501E600F9B7C5 /* Converter.swift in Sources */,
 				A854A4222991EA52001AC9D8 /* Wind.swift in Sources */,
 				A854A4242992C448001AC9D8 /* List.swift in Sources */,
+				A89B59D629A62B5700805B9F /* ForecastList.swift in Sources */,
+				A89B59D929A66EB200805B9F /* CityDetailTableViewCell.swift in Sources */,
 				A854A4262992CAAF001AC9D8 /* Main.swift in Sources */,
 				A81548B5298AD8470075F256 /* InterestPlacesTableViewCell.swift in Sources */,
+				A89B59D229A5F14A00805B9F /* WeatherForecast.swift in Sources */,
 				A81548782988290B0075F256 /* InterestPlacesViewController.swift in Sources */,
 				A8C7BD3C298CFB8E00E46D44 /* CityDetailViewController.swift in Sources */,
 				A89B59D029A3899300805B9F /* Pollution.swift in Sources */,

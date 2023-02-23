@@ -10,6 +10,14 @@ import Foundation
 struct Wind: Codable {
     let speed: Double
     let deg: Int
+    let gust: Double
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.speed = (try? container.decode(Double.self, forKey: .speed)) ?? 0.0
+        self.deg = (try? container.decode(Int.self, forKey: .deg)) ?? 0
+        self.gust = (try? container.decode(Double.self, forKey: .gust)) ?? 0.0
+    }
 }
 
 extension Wind {

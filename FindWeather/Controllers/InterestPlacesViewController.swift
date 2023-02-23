@@ -30,7 +30,7 @@ class InterestPlacesViewController: UIViewController {
         setupSearchControllerUI()
         setupTableView()
         
-        Task{
+        Task {
             await loadWeatherDataAsync()
         }
     }
@@ -54,20 +54,6 @@ class InterestPlacesViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .gray
         navigationController?.navigationBar.barTintColor = .systemPink
     }
-
-    private func loadWeatherData() {
-        APICaller().weatherByCityCode(completion: { [weak self] result in
-            switch result {
-            case .success(let cityList):
-                self?.cityList = cityList.list
-                DispatchQueue.main.async {
-                    self?.weatherTableView.reloadData()
-                }
-            case.failure(let error):
-                print(error.localizedDescription)
-            }
-        })
-    }
     
     private func loadWeatherDataAsync() async {
         do{
@@ -86,6 +72,7 @@ class InterestPlacesViewController: UIViewController {
     }
 }
 
+//MARK: UITableView
 extension InterestPlacesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cityList.count
