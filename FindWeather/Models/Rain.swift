@@ -2,7 +2,7 @@
 //  Rain.swift
 //  FindWeather
 //
-//  Created by ChangwonKim on 2023/02/22.
+//  Created by window1 on 2023/02/22.
 //
 
 import Foundation

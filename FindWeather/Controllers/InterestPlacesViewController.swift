@@ -12,16 +12,8 @@ class InterestPlacesViewController: UIViewController {
     @IBOutlet weak var weatherTableView: UITableView!
     
     private var cityList: [List] = []
-    private var filtterdList: [List] = []
     private var cityDataByName: WeatherResponseName?
     private var searchResultsTableViewController: SearchResultsViewController?
-    
-    var isFiltering: Bool {
-        let searchController = self.navigationItem.searchController
-        let isActive = searchController?.isActive ?? false
-        let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
-        return isActive && isSearchBarHasText
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

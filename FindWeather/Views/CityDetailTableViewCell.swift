@@ -2,7 +2,7 @@
 //  CityDetailTableViewCell.swift
 //  FindWeather
 //
-//  Created by ChangwonKim on 2023/02/23.
+//  Created by window1 on 2023/02/23.
 //
 
 import UIKit
@@ -27,7 +27,7 @@ class CityDetailTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func configureAsync(with model: ForecastList) async throws -> Void {
+    public func configure(with model: ForecastList) async throws -> Void {
         guard let url = URL(string: "https://openweathermap.org/img/wn/\(String(describing: model.weather[0].icon))@2x.png") else { return }
         let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { return }

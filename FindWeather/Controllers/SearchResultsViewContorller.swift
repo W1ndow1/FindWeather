@@ -16,7 +16,7 @@ class SearchResultsViewController: UIViewController {
     
     @IBOutlet weak var searchResultTableView: UITableView!
     
-    public weak var searchDelegate: SearchResultsViewControllerDelegate?
+    public var searchDelegate: SearchResultsViewControllerDelegate?
     
     public var cityData: WeatherResponseName?
     
