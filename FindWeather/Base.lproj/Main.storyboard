@@ -245,7 +245,7 @@
                     </view>
                     <size key="freeformSize" width="393" height="1200"/>
                     <connections>
-                        <outlet property="blueView" destination="lCb-Zc-1WJ" id="eps-0h-MDd"/>
+                        <outlet property="blueView" destination="lCb-Zc-1WJ" id="AKe-uL-3Mb"/>
                         <outlet property="cityName" destination="H5u-Ib-qQ8" id="4eG-8h-ipj"/>
                         <outlet property="contentView" destination="WGL-dd-TLC" id="FJP-zm-QMo"/>
                         <outlet property="currrentTemperature" destination="8ob-0h-MeX" id="7s1-g5-C76"/>
@@ -255,7 +255,7 @@
                         <outlet property="humidity" destination="GwY-9l-1t9" id="mV4-Jo-CwI"/>
                         <outlet property="mapView" destination="h7s-bi-T2Z" id="Hxy-7l-MzD"/>
                         <outlet property="pressure" destination="HC2-gL-idq" id="46g-ZD-aY0"/>
-                        <outlet property="redView" destination="SCG-qS-XWD" id="0Jh-yI-t9d"/>
+                        <outlet property="redView" destination="SCG-qS-XWD" id="EZ7-a1-9F5"/>
                         <outlet property="scrollView" destination="pbz-rb-cDa" id="lBB-GR-I5t"/>
                         <outlet property="sunrise" destination="iPD-Ys-dOR" id="zHK-P1-95D"/>
                         <outlet property="sunset" destination="R4D-mD-AjL" id="0mc-F4-1gf"/>

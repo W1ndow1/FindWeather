@@ -35,7 +35,7 @@ class CityDetailTableViewCell: UITableViewCell {
         weatherIcon.image = imageData
         tempMin.text = "최소:\(model.main.tempMin)"
         tempMax.text = "최대:\(model.main.tempMax)"
-        forecastTime.text = "\(Date(timeIntervalSince1970: Double(model.dt)).toStringKST(dataFormat: "MM/dd HH:mm"))"
+        forecastTime.text = "\(Date(timeIntervalSince1970: Double(model.dt)).toStringKST(dataFormat: "MM/dd(E) HH:mm"))"
         currentTemp.text = "체감온도:\(model.main.feelsLike)"
         
     }

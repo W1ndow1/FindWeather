@@ -7,7 +7,6 @@
 
 import UIKit
 import MapKit
-import CoreLocation
 
 class CityDetailViewController: UIViewController {
 
@@ -34,12 +33,15 @@ class CityDetailViewController: UIViewController {
     
     private var forecastList: [ForecastList] = []
     private var cityData: WeatherResponseName?
+    private var headerView: CityDetailHeaderView?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        registerHeaderXib(tableView: forecastWeatherTableView)
         registerXib(tableView: forecastWeatherTableView)
+        
         blueView.layer.cornerRadius = 10
         redView.layer.cornerRadius = 10
         windClockView.layer.cornerRadius = 10
@@ -47,6 +49,8 @@ class CityDetailViewController: UIViewController {
         windClock.image = UIImage(named: "upArrow")?.withTintColor(.white)
         
         forwardWeatherTableViewUISet()
+        
+        
         
         
         
@@ -58,6 +62,11 @@ class CityDetailViewController: UIViewController {
     }
     
     //TODO: - 
+    public func registerHeaderXib(tableView: UITableView) {
+        let nibName = UINib(nibName: "CityDetailHeaderView", bundle: nil)
+        tableView.register(nibName, forHeaderFooterViewReuseIdentifier: "CityDetailHeaderView")
+    }
+    
     public func registerXib(tableView: UITableView) {
         let nibName = UINib(nibName: "CityDetailTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "CityDetailCell")
@@ -65,6 +74,7 @@ class CityDetailViewController: UIViewController {
     
     
     private func forwardWeatherTableViewUISet() {
+        
         forecastWeatherTableView.delegate = self
         forecastWeatherTableView.dataSource = self
     }
@@ -96,7 +106,7 @@ class CityDetailViewController: UIViewController {
             guard let imageData = data else { return }
             DispatchQueue.main.async {
                 self?.cityData = cityData
-                let cityNameToKo = String.codeToCityName(id: cityData.id)
+                let cityNameToKo = String().codeToCityName(id: cityData.id)
                 self?.cityName.text = cityNameToKo.count == 0 ? cityData.name : cityNameToKo
                 self?.weatherIcon.image = UIImage(data: imageData)
                 self?.currrentTemperature.text = "\(String(format: "%.1f", cityData.main.temp))º"
@@ -138,7 +148,7 @@ extension CityDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
+        70
     }
 }
 

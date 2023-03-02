@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension String {
-   static func codeToCityName(id: Int) -> String{
+    func codeToCityName(id: Int) -> String{
         let data: [Int : String] = [
                 1842616 : "공주",
                 1841811 : "광주",

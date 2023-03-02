@@ -97,7 +97,7 @@ class APICaller {
         }
         let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            print("noData")
+            print("networkError")
             throw NetworkError.noData}
         guard let result = try JSONDecoder().decode(WeatherForecast?.self, from: data) else {
             print("decodingError")
