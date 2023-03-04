@@ -13,22 +13,25 @@ class CityDetailViewController: UIViewController {
     
     private var forecastList: [ForecastList] = []
     private var cityData: WeatherResponseName?
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         forwardWeatherTableViewSetup()
         
         Task {
-            let forecastList = try await APICaller().fiveDayWeatherforecastAsync(lat: cityData?.coord.lat ?? 0.0, lon: cityData?.coord.lon ?? 0.0)
-            self.forecastList = forecastList.list
+            do{
+                let forecastList = try await APICaller().fiveDayWeatherforecastAsync(lat: cityData?.coord.lat ?? 0.0, lon: cityData?.coord.lon ?? 0.0)
+                self.forecastList = forecastList.list
+            } catch {
+                print("error")
+            }
             forecastWeatherTableView.reloadData()
         }
     }
 
     private func forwardWeatherTableViewSetup() {
+
         forecastWeatherTableView.delegate = self
         forecastWeatherTableView.dataSource = self
         forecastWeatherTableView.register(UINib(nibName: "CityDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "CityDetailCell")
@@ -60,7 +63,7 @@ extension CityDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        70
+        60
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -72,11 +75,10 @@ extension CityDetailViewController: UITableViewDelegate, UITableViewDataSource {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CityDetailHeaderView") as? CityDetailHeaderView else {
             return UIView()
         }
-        if let cityData = self.cityData {
-            headerView.configure(with: cityData)
-        } else {
-            print("NotData")
+        guard let cityData = cityData else {
+            return UIView()
         }
+        headerView.configure(with: cityData)
         return headerView
     }
 }

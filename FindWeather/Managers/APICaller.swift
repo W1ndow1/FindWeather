@@ -67,6 +67,25 @@ class APICaller {
         task.resume()
     }
     
+    func fiveDayWeatherforecast(lat latitude: Double, lon longtitude: Double, completion: @escaping (Result<WeatherForecast, Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.baseURL)forecast?lat=\(latitude)&lon=\(longtitude)&appid=\(Bundle.main.APIKey)&\(Constants.language)&units=metric") else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url), completionHandler: { data, response, error in
+            guard let data = data, error == nil else { return }
+            do {
+                let results = try JSONDecoder().decode(WeatherForecast.self, from: data)
+                completion(.success(results))
+            } catch {
+                completion(.failure(NetworkError.decodingError))
+                print(error.localizedDescription)
+            }
+        })
+        task.resume()
+    }
+    
+    
+    
     func weatherByCityNameAsync(cityName query: String) async throws -> WeatherResponseName {
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
             throw NetworkError.badQuary }
@@ -84,21 +103,19 @@ class APICaller {
             throw NetworkError.badURL }
         let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw NetworkError.noData }
-        guard let result = try JSONDecoder().decode(WeatherResponseCode?.self, from: data) else { throw NetworkError.decodingError
-            
-        }
+        guard let result = try JSONDecoder().decode(WeatherResponseCode?.self, from: data) else { throw NetworkError.decodingError }
         return result
     }
     
     func fiveDayWeatherforecastAsync(lat latitude: Double, lon longtitude: Double) async throws -> WeatherForecast {
         guard let url = URL(string: "\(Constants.baseURL)forecast?lat=\(latitude)&lon=\(longtitude)&appid=\(Bundle.main.APIKey)&\(Constants.language)&units=metric") else {
-            throw NetworkError.badURL
+            fatalError("badURL")
         }
         let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw NetworkError.noData}
+            fatalError("NotResponse")}
         guard let result = try JSONDecoder().decode(WeatherForecast?.self, from: data) else {
-            throw NetworkError.decodingError
+            fatalError("decodingError")
         }
         return result
     }
