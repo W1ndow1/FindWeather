@@ -36,6 +36,7 @@ class CityDetailViewController: UIViewController {
         forecastWeatherTableView.dataSource = self
         forecastWeatherTableView.register(UINib(nibName: "CityDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "CityDetailCell")
         forecastWeatherTableView.register(UINib(nibName: "CityDetailHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "CityDetailHeaderView")
+        forecastWeatherTableView.register(UINib(nibName: "LicenseFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "LicenseFooterView")
     }
     
     public func configure(with cityData: WeatherResponseName) {
@@ -80,5 +81,14 @@ extension CityDetailViewController: UITableViewDelegate, UITableViewDataSource {
         }
         headerView.configure(with: cityData)
         return headerView
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "LicenseFooterView")
+        return footerView?.bounds.height ?? 50
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "LicenseFooterView") as? LicenseFooterView else { return UIView() }
+        return footerView
     }
 }

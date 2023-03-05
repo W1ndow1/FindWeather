@@ -38,6 +38,8 @@
 		A89B59DA29A66EB200805B9F /* CityDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A89B59D829A66EB200805B9F /* CityDetailTableViewCell.xib */; };
 		A8C7BD3C298CFB8E00E46D44 /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C7BD3B298CFB8E00E46D44 /* CityDetailViewController.swift */; };
 		A8C7BD3E298D010A00E46D44 /* SearchResultsViewContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C7BD3D298D010A00E46D44 /* SearchResultsViewContorller.swift */; };
+		A8DAF28C29B4AC99005FB4D9 /* LicenseFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8DAF28B29B4AC99005FB4D9 /* LicenseFooterView.xib */; };
+		A8DAF28E29B4B6C7005FB4D9 /* LicenseFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DAF28D29B4B6C7005FB4D9 /* LicenseFooterView.swift */; };
 		A8E96706298ED46D00EE8ACC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E96705298ED46D00EE8ACC /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,8 @@
 		A8B70CED298BE5AE0097580F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A8C7BD3B298CFB8E00E46D44 /* CityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailViewController.swift; sourceTree = "<group>"; };
 		A8C7BD3D298D010A00E46D44 /* SearchResultsViewContorller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewContorller.swift; sourceTree = "<group>"; };
+		A8DAF28B29B4AC99005FB4D9 /* LicenseFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LicenseFooterView.xib; sourceTree = "<group>"; };
+		A8DAF28D29B4B6C7005FB4D9 /* LicenseFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseFooterView.swift; sourceTree = "<group>"; };
 		A8E96705298ED46D00EE8ACC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,6 +228,8 @@
 				A89B59D829A66EB200805B9F /* CityDetailTableViewCell.xib */,
 				A8552ABE29AC88B6008E78F3 /* CityDetailHeaderView.swift */,
 				A8552AC229AC9426008E78F3 /* CityDetailHeaderView.xib */,
+				A8DAF28D29B4B6C7005FB4D9 /* LicenseFooterView.swift */,
+				A8DAF28B29B4AC99005FB4D9 /* LicenseFooterView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -345,6 +351,7 @@
 				A81548832988290D0075F256 /* LaunchScreen.storyboard in Resources */,
 				A81548AC298A06910075F256 /* WeatherInfo.plist in Resources */,
 				A81548802988290D0075F256 /* Assets.xcassets in Resources */,
+				A8DAF28C29B4AC99005FB4D9 /* LicenseFooterView.xib in Resources */,
 				A89B59DA29A66EB200805B9F /* CityDetailTableViewCell.xib in Resources */,
 				A81548B6298AD8470075F256 /* InterestPlacesTableViewCell.xib in Resources */,
 				A815487B2988290B0075F256 /* Main.storyboard in Resources */,
@@ -389,6 +396,7 @@
 				A81548782988290B0075F256 /* InterestPlacesViewController.swift in Sources */,
 				A8C7BD3C298CFB8E00E46D44 /* CityDetailViewController.swift in Sources */,
 				A89B59D029A3899300805B9F /* Pollution.swift in Sources */,
+				A8DAF28E29B4B6C7005FB4D9 /* LicenseFooterView.swift in Sources */,
 				A80B58C2299B960800B881D9 /* Protocol.swift in Sources */,
 				A8C7BD3E298D010A00E46D44 /* SearchResultsViewContorller.swift in Sources */,
 				A815487E2988290B0075F256 /* FindWeather.xcdatamodeld in Sources */,
