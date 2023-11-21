@@ -2,7 +2,7 @@
 //  LicenseFooterView.swift
 //  FindWeather
 //
-//  Created by ChangwonKim on 2023/03/05.
+//  Created by window1 on 2023/03/05.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ class LicenseFooterView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        licenseLabel.text = "2023 😀 화이팅!!"
-        licenseLabel.textColor = UIColor.systemPink
+        licenseLabel.text = "Copyright 2023 window1 😀🍎🦉"
+        licenseLabel.textColor = UIColor.white
     }
 }

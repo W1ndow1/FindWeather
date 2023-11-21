@@ -130,6 +130,7 @@
 		A81548672988290B0075F256 = {
 			isa = PBXGroup;
 			children = (
+				A8B70CED298BE5AE0097580F /* README.md */,
 				A81548722988290B0075F256 /* FindWeather */,
 				A815488C2988290D0075F256 /* FindWeatherTests */,
 				A81548962988290D0075F256 /* FindWeatherUITests */,
@@ -157,13 +158,10 @@
 				A81548A8298931120075F256 /* Controllers */,
 				A81548732988290B0075F256 /* AppDelegate.swift */,
 				A81548752988290B0075F256 /* SceneDelegate.swift */,
-				A81548792988290B0075F256 /* Main.storyboard */,
 				A815487F2988290D0075F256 /* Assets.xcassets */,
-				A81548812988290D0075F256 /* LaunchScreen.storyboard */,
 				A81548842988290D0075F256 /* Info.plist */,
 				A81548AB298A06910075F256 /* WeatherInfo.plist */,
 				A815487C2988290B0075F256 /* FindWeather.xcdatamodeld */,
-				A8B70CED298BE5AE0097580F /* README.md */,
 			);
 			path = FindWeather;
 			sourceTree = "<group>";
@@ -222,6 +220,8 @@
 		A81548B0298AD47C0075F256 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A81548812988290D0075F256 /* LaunchScreen.storyboard */,
+				A81548792988290B0075F256 /* Main.storyboard */,
 				A81548B3298AD8470075F256 /* InterestPlacesTableViewCell.swift */,
 				A81548B4298AD8470075F256 /* InterestPlacesTableViewCell.xib */,
 				A89B59D729A66EB200805B9F /* CityDetailTableViewCell.swift */,

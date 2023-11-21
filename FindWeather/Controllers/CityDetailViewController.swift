@@ -31,7 +31,6 @@ class CityDetailViewController: UIViewController {
     }
 
     private func forwardWeatherTableViewSetup() {
-
         forecastWeatherTableView.delegate = self
         forecastWeatherTableView.dataSource = self
         forecastWeatherTableView.register(UINib(nibName: "CityDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "CityDetailCell")
