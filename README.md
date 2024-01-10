@@ -1,10 +1,14 @@
 # FindWeather
 
 ##(1)설명 : 날씨 조회 어플리케이션 
-
+---
+<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/23c29bca-6880-4106-acf7-dbdae599d172" width=300 height=650>
+<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/f040d8ab-3379-49b4-befe-982cd068de2c" width=300 height=650>
+<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/862a9105-afbd-4579-8df0-8fea46a75391" width=300 height=650>
+<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/2f19047f-7547-45f0-8caa-fa983cb7e7d3" width=300 height=650>
 
 ##(2)API참고사항 : openweathermap.org에서 사용하는 API 예시
-
+---
 - 위도 경도 정보로 조회
 https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 - 도시 명칭으로 조회
