@@ -2,10 +2,10 @@
 
 ##(1)설명 : 날씨 조회 어플리케이션 
 ---
-<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/23c29bca-6880-4106-acf7-dbdae599d172" width=300 height=650>
-<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/f040d8ab-3379-49b4-befe-982cd068de2c" width=300 height=650>
-<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/862a9105-afbd-4579-8df0-8fea46a75391" width=300 height=650>
-<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/2f19047f-7547-45f0-8caa-fa983cb7e7d3" width=300 height=650>
+<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/23c29bca-6880-4106-acf7-dbdae599d172" width=350 height=758>
+<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/f040d8ab-3379-49b4-befe-982cd068de2c" width=350 height=758>
+<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/862a9105-afbd-4579-8df0-8fea46a75391" width=350 height=758>
+<img src="https://github.com/W1ndow1/FindWeather/assets/34152916/2f19047f-7547-45f0-8caa-fa983cb7e7d3" width=350 height=758>
 
 ##(2)API참고사항 : openweathermap.org에서 사용하는 API 예시
 ---
